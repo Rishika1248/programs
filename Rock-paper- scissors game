@@ -1,0 +1,47 @@
+using System;
+
+class RockPaperScissors
+{
+    static void Main()
+    {
+        string[] choices = { "Rock", "Paper", "Scissors" };
+        Random random = new Random();
+        
+        while (true)
+        {
+            Console.WriteLine("Choose Rock, Paper, or Scissors (or type 'exit' to quit): ");
+            string userChoice = Console.ReadLine();
+
+            if (userChoice.ToLower() == "exit")
+            {
+                break;
+            }
+
+            if (Array.Exists(choices, choice => choice.Equals(userChoice, StringComparison.OrdinalIgnoreCase)))
+            {
+                int computerChoiceIndex = random.Next(choices.Length);
+                string computerChoice = choices[computerChoiceIndex];
+                Console.WriteLine($"Computer chose: {computerChoice}");
+
+                if (userChoice.Equals(computerChoice, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("It's a tie!");
+                }
+                else if ((userChoice.Equals("Rock", StringComparison.OrdinalIgnoreCase) && computerChoice == "Scissors") ||
+                         (userChoice.Equals("Scissors", StringComparison.OrdinalIgnoreCase) && computerChoice == "Paper") ||
+                         (userChoice.Equals("Paper", StringComparison.OrdinalIgnoreCase) && computerChoice == "Rock"))
+                {
+                    Console.WriteLine("You win!");
+                }
+                else
+                {
+                    Console.WriteLine("You lose!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
